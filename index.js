@@ -6,7 +6,8 @@ const util = require("util");
 const generatorMarkdown = require('./util/generatorMarkdown');
 const { fstat } = require("fs");
 // TODO: Create an array of questions for user input
-const questions = [{
+inquirer.prompt([
+    {
 
     type: "input",
     message: "Please enter the title of the project.",
@@ -35,15 +36,30 @@ const questions = [{
     nessage:"What does the user need to install?",
     name:"Installation"
 },
+{
+    type:"input",
+    message:"What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.",
+    name:"stepstoinstall"
+},
+{
+    type: "input",
+    message:"Provide instructions and examples for use.",
+    name:"usage"
+},
 { 
     type: "list",
     message: "What liscence does your project use?",
-    choices: ['none',]
+    choices: ['none', 'inquirer']
 
-}
+},
+
+])
+.then((answer) => {
+    console.log();
 
 
-];
+
+});
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
